@@ -64,7 +64,6 @@ public:
         this->line = line;
     }
 
-public:
     string to_string()
     {
         return "Token(" + type_to_string(type) + ", " + lexeme + ", " + std::to_string(line) + ")";
@@ -73,7 +72,6 @@ public:
 
 class Scanner
 {
-    map<string, TokenType> keyword;
     string source;
     vector<Token> tokens;
     int start = 0;
@@ -81,14 +79,8 @@ class Scanner
     int line = 1;
 
 public:
-    Scanner()
-    {
-        keyword.insert(make_pair("output", OUTPUT));
-    }
-
     Scanner(string source)
     {
-        Scanner();
         this->source = source;
     }
 
@@ -161,8 +153,7 @@ public:
         while (isalnum(peek()))
             advance();
         string text = source.substr(start, current - start);
-        TokenType type = keyword[text];
-        if (type == TokenType::OUTPUT)
+        if (text == "output")
         {
             add_token(OUTPUT);
         }
@@ -220,8 +211,9 @@ public:
 int main()
 {
     string source;
-    while (cin >> source)
+    while (cin)
     {
+        getline(cin, source);
         Scanner scanner(source);
         vector<Token> tokens = scanner.scan_tokens();
         for (Token token : tokens)
