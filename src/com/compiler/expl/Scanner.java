@@ -32,7 +32,7 @@ class Scanner {
             scanToken();
         }
 
-        tokens.add(new Token(EOF, "", null, line));
+        tokens.add(new Token(EOF, "", line));
         return tokens;
     }
 
@@ -94,7 +94,7 @@ class Scanner {
             while (isDigit(peek())) advance();
         }
 
-        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
+        addToken(NUMBER);
     }
 
     private void identifier() {
@@ -140,11 +140,7 @@ class Scanner {
     }
 
     private void addToken(TokenType type) {
-        addToken(type, null);
-    }
-
-    private void addToken(TokenType type, Object literal) {
         String text = source.substring(start, current);
-        tokens.add(new Token(type, text, literal, line));
+        tokens.add(new Token(type, text, line));
     }
 }
