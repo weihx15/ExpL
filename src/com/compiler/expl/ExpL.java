@@ -55,8 +55,8 @@ public class ExpL {
     }
 
     // Error reporting
-    static void error(int line, String message) {
-        report(line, "", message);
+    static void error(int line, char which, String message) {
+        report(line, " at '" + which + "'", message);
     }
 
     private static void report(int line, String where, String message) {

@@ -77,7 +77,7 @@ class Scanner {
                 } else if (isAlpha(c)) {
                     identifier();
                 } else {
-                    ExpL.error(line, "Unexpected character.");
+                    ExpL.error(line, c, "Unexpected character.");
                 }
                 break;
         }
